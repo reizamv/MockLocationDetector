@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 //https://medium.com/@tigr/how-to-publish-your-android-studio-library-to-jcenter-5384172c4739#.3ain9yhqi
 ext {
@@ -33,13 +34,13 @@ ext {
 //}
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '25.0.0'
+    compileSdkVersion 30
+    buildToolsVersion '25.0.3'
 
     defaultConfig {
         //applicationId "com.inforoeste.mocklocationdetector"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
     }
@@ -52,12 +53,18 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.4.0'
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.13'
+    api 'androidx.appcompat:appcompat:1.2.0'
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
 // Place it at the end of the file
 //apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
 //apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
 apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
+repositories {
+    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+    mavenCentral()
+}
